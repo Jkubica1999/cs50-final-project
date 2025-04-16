@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="{{ g.locale }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>{% block title %}{{ _('Default Title') }}{% endblock %}</title>
+    <script>
+        function switchLanguage(targetLang) {
+          const pathParts = window.location.pathname.split('/');
+          pathParts[1] = targetLang; // overwrite language code
+          const newPath = pathParts.join('/');
+          window.location.href = newPath;
+        }
+      </script>
+</head>
+<body class="bg-gray-100 text-gray-800 min-h-screen flex flex-col justify-between">
+
+    <!-- Header -->
+    <header class="bg-white shadow">
+        <div class="container mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center">
+            <h1 class="text-xl font-bold text-green-700 mb-4 sm:mb-0 sm:mr-8">MachInnovate</h1>
+            <nav class="flex flex-col sm:flex-row justify-between w-full sm:items-center">
+                <!-- Navigation Links -->
+                <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-6">
+                    <a href="/{{ lang }}" class="text-green-700 hover:text-lime-400 underline">{{ _('Home') }}</a>
+                    <div class="relative group">
+                        <a href="#" class="text-green-700 hover:text-lime-400 underline">{{ _('Products') }} ▾</a>
+                        <div class="absolute bg-white shadow-lg mt-0 rounded text-sm z-10 min-w-[150px] transition-opacity duration-200 ease-in-out opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto">
+                            {% for c in category_links %}
+                            <a href="/{{ lang }}/products/{{ c.id }}" class="block px-4 py-2 hover:bg-lime-100 text-green-700">
+                              {{ c.name }}
+                            </a>
+                            {% endfor %}
+                        </div>
+                    </div>                 
+                    <a href="/{{ lang }}/contact" class="text-green-700 hover:text-lime-400 underline">{{ _('Contact') }}</a>
+                    <a href="/{{ lang }}/about" class="text-green-700 hover:text-lime-400 underline">{{ _('About') }}</a>
+                    <a href="/{{ lang }}/faq?" class="text-green-700 hover:text-lime-400 underline">{{ _('FAQ') }}</a>
+                </div>
+
+                <!-- Language List -->
+                <div class="flex space-x-4 mt-4 sm:mt-0">
+                    <button onclick="switchLanguage('en')" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
+                        English
+                    </button>
+                    <button onclick="switchLanguage('pl')" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
+                        Polski
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8 flex-1">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white text-center py-4 text-sm text-gray-600 border-t border-gray-300">
+        <p>&copy; 2025 MachInnovate</p>
+    </footer>
+
+</body>
+</html>

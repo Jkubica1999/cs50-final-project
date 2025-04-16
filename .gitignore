@@ -1,0 +1,29 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environments
+.venv/
+env/
+venv/
+ENV/
+*.env
+
+# VS Code settings
+.vscode/
+
+# Mac system files
+.DS_Store
+
+# Flask cache or instance folders
+instance/
+*.db
+*.sqlite3
+
+# Translation compiled files
+*.mo
+
+# Secret files (if any)
+config.py
+secrets.env
